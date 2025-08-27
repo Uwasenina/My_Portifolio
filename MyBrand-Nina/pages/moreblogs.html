@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Details</title>
+    <link rel="stylesheet" href="../css/moreblogs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="shortcut icon" type="image/png" href="">
+
+</head>
+
+<body>
+    <div class="nav">
+        <div class="leftnav">
+            <label for="" class="logo">UY</label>
+        </div>
+        <div class="rightnav">
+            <ul>
+                <li><a class="home" href="../index.html"> Home</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="leftBlogs" class="left-section"></div>
+        <div id="rightBlogs" class="right-section"></div>
+    </div>
+
+    <script>
+        const param = new URLSearchParams(window.location.search);
+        const blogId = param.get("blogId");
+
+        
+
+        // displaying all blogs
+
+        const apiUrl = "https://brand-backend-v2xk.onrender.com/brand/blog/gets";
+
+        fetch(apiUrl, {
+            method: "GET",
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(userData => {
+                // Process the retrieved user data
+                fillBlogs(userData.data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+
+
+
+        const apiUrl1 = `https://brand-backend-v2xk.onrender.com/brand/blog/get/${blogId}`;
+
+        fetch(apiUrl1)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then((blogData) => {
+                console.log("response data", blogData.data)
+                fillBlog(blogData.data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                return null;
+            });
+
+        async function likeBlog(id) {
+            var addLike = document.getElementById("addLike")
+            if (!localStorage.getItem("token")) {
+                alert("Login first to like");
+                window.location.href = "login.html";
+                return;
+            } else {
+                   
+                try {
+                    const apiUrl3 = `https://brand-backend-v2xk.onrender.com/brand/blog/like/${id}`;
+
+                    const response = await fetch(apiUrl3, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${localStorage.getItem("token")}`, 
+                        },
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("Failed to like the blog");
+                    }
+                    const result = await response.json();
+                    const data = result.data
+                    document.getElementById('likeCount').innerText = `${data.likes} :Like(s) `;
+
+                 if (data.likedBy.includes(localStorage.getItem("userId"))) {
+                     alert("liked success");
+                   } else {
+                         alert("disliked 😥");
+                     }               
+
+                } catch (error) {
+                    console.error("Error during liking:", error);
+                }
+            }
+        }
+
+
+
+        //Fetch single blog
+
+          try {
+            const updatedBlogResponse =  fetch(`https://brand-backend-v2xk.onrender.com/brand/blog/get/${blogId}`,
+                {
+                    method: "GET",
+                    headers: {
+                                "Content-Type": "application/json",
+                             },
+                }
+
+            );
+          
+            if (!updatedBlogResponse.ok) {
+                throw new Error("Failed to fetch updated blog data");
+            }
+          
+            const updatedBlogData =  updatedBlogResponse.json();
+          
+            fillBlog(updatedBlogData.data);
+          } catch (error) {
+            console.error("Error during liking:", error);
+          }
+  
+
+        
+        //fetching left blogs
+                const fillBlogs = (blogs) => {
+            const leftBlog = document.getElementById("leftBlogs");
+
+            blogs.forEach((blog) => {
+                const blogLink = document.createElement("a");
+                blogLink.href = `?blogId=${blog._id}`;
+                blogLink.innerHTML = `
+                    <div class="inner">
+                        <div>
+                            <img src="${blog.image}" alt="">
+                            <h3>${blog.title}</h3>
+                            <p>${blog.description.slice(0,150)}...</p>
+                        </div>
+                    </div>
+                `;
+                leftBlog.appendChild(blogLink);
+            });
+        };
+
+
+         // create comments
+
+  async function AddComment() {
+    var wComment = document.getElementById("wComment").value;
+
+    if (!localStorage.getItem("token")) {
+        alert("Login first to comment");
+        window.location.href = "login.html";
+        return;
+    }
+    if(wComment.trim() == " "){
+      document.getElementById("paragraph").innerHTML = "Empty comment not allowed";
+    }
+
+    try {
+        const apiUrl = `https://brand-backend-v2xk.onrender.com/brand/blog/createCom/${blogId}`;
+        const response = await fetch(apiUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`, 
+            },
+            body: JSON.stringify({
+                comment: wComment,
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        alert("Comment added successfully!");
+        
+        window.location.reload()
+
+    } catch (error) {
+        console.error("Error adding comment:", error);
+    }
+}
+
+
+
+
+
+
+        const fillBlog = (thisBlog) => {
+
+            const rightBlog = document.getElementById("rightBlogs");
+            thisBlog.commentedBy.map(item => item._id)
+            rightBlog.innerHTML = `
+                <div class="inner-right">
+                    <img src="${thisBlog.image}" alt="">
+                    <div>
+                        <h3>${thisBlog.title}</h3>
+                        <p >${thisBlog.description}</p>
+                        <div class="comment-div">
+                            <div class="likes">
+                                <i class="like fas fa-heart" onclick="likeBlog('${thisBlog._id}')"></i>
+                                <div id="likeCount">${thisBlog.likes} Like(s)</div>
+                            </div>
+                            <div class="bottomcomment">
+                                <textarea id="wComment" cols="10" rows="10" placeholder="Write comment"></textarea>
+                                <p id ="paragraph"></p> 
+                                <div class="comment-button">
+                                    <button onclick="AddComment()" id="addCom">Add comment</button>
+                                </div>
+                                <div id="comList" style="color: aliceblue;">
+                                    <h1 style="color: #ff6300; font-size: 15px; padding-bottom: 1rem;">Comment(s)</h1>
+                                </div>
+                            </div>
+                           ${thisBlog.comments.map(comment => `
+                                <div class="comdiv">
+                                    <h1 style="font-size:20px;"><i class="user fas fa-user"></i>${comment.username}</h1>
+                                    <h4 style="font-size:12px; margin-left: 30px;">${comment.comment}</h4>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+    <link rel="stylesheet" href="./../css/login.css">
+    <link rel="shortcut icon" type="image/png" href="">
+
+    <style>
+         .foot{
+      align-self: center;
+      text-align: center;
+      padding-left: 0;
+    }
+      .change{
+        padding-top: 2%;
+        margin: auto;
+        align-self: center;
+        width: 100%;
+      }
+      h3 {
+    border-bottom: none;
+    width: 80%;
+    text-align: inherit;
+}
+.sent-paragraph{
+  width: 100%;
+  padding: 0;
+  font-size: 13px;
+  color:  #ff6300;
+}
+@media (max-width: 858px){
+.hed {
+    text-align: center;
+}
+}
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="leftnav"> 
+         <label for="" class="logo">UY
+         </label>
+        </div>
+        <div class="rightnav">
+          <ul>
+            <li><a class="" href="./../index.html">Home</a></li>
+          </ul>
+        </div>
+      </div>
+    
+
+      <div class="login">
+        <div class="place" style="margin-top: 15%;">
+
+            <div class="hed" style="margin-bottom: 0rem;"><h3>SignUp</h3></div>
+            <p  class="sent-paragraph" id="reg-success"></p>
+            <form action="" id="submitUser">
+            <div class="change"> <input type="text" id="email" placeholder="Email"><p id="sms-e" class="pargraph"></p></div>
+            <div class="change"> <input type="text" id="name" placeholder="User name"><p id="sms-n" class="pargraph"></p></div>
+            <div class="change"><input type="password"  id="pass" placeholder="password"><p id="sms-p" class="pargraph"></p></div>
+            <div class="change"><input type="password" id="cpass" placeholder=" confirm password"><p id="sms-conf-p" class="pargraph"></p></div>
+            <div class="change"><span><input type="radio" value="Male" name="gender" id="male">Male</span>
+            <span><input type="radio" value="Female" name="gender" id="female">Female</span><p id="sms-gender" class="pargraph"></p></div>
+            <div class="change">  <input type="button"  value="Signup" onclick="signup()"> </div>
+            </form>
+            
+            <div class="foot" style="padding-top: 0rem;">
+                <p>A member? <span><a href="login.html" style="color: #ff6300; font-weight: bold;">login</a></span></p> 
+            </div>
+        </div>
+      </div>
+    <script src="../scripts/signup.js"></script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+:root {
+  --main-color: #03010e;
+  --main-div-color: #1c1c1c;
+  --headings: #ff6300;
+  --text-color: #ffffff;
+  --validate: #D7332F;
+  --main-color-2: #7b1fa2;
+}
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+  font-family: "poppins", sans-serif;
+}
+
+body{
+    background-color:#03010E;
+    overflow:hidden;
+}
+.nav{
+    height: 5rem;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #03010E;
+    padding: 20px 20px;
+  }
+    label.logo, .home{
+   color: #ff6300;
+    font-size: 20px;
+    line-height: 80px;
+    padding: 0 100px;
+    font-weight: bold;
+  }
+.container {
+    display: grid;
+    height: 100vh;
+    gap: 5rem; 
+}
+
+#leftBlogs
+#rightBlogs {
+    overflow-y: auto; 
+    height: 100rem;
+}
+
+.left-section {
+  width: 30%;
+}
+
+.left-section {
+    position: fixed;
+    top: 5rem; 
+    bottom: 0;
+    width: 30%;
+    overflow-y: auto; 
+}
+.right-section{
+    position: fixed;
+    top: 5rem; 
+    bottom: 0;
+    width: 69%;
+    overflow-y: auto;
+    padding-bottom: 5rem;
+}
+
+.inner {
+    text-align: start;
+    align-items: start;
+    padding: 1rem;
+    margin-top: 1rem;
+    background-color: #03010E;
+}
+.inner h3{
+  padding-bottom: 0.5rem;
+  color: #ff6300;
+}
+.inner p{
+  font-size: 15px;
+  color: var(--text-color);
+}
+
+#rightBlogs {
+    margin-left: 30%; 
+}
+
+
+
+.left-section::-webkit-scrollbar,
+.right-section::-webkit-scrollbar {
+    width: 0;
+}
+
+.left-section:hover::-webkit-scrollbar,
+.right-section:hover::-webkit-scrollbar {
+    width: 5px; 
+}
+
+.left-section::-webkit-scrollbar-thumb,
+.right-section::-webkit-scrollbar-thumb {
+   background-color:  var(--headings);
+}
+
+.left-section::-webkit-scrollbar-track,
+.right-section::-webkit-scrollbar-track {
+    background-color: #eee; 
+}
+ .left-section{
+          padding-right: 2rem;
+          background-color: #03010E;
+          margin-left: 1rem;
+      }
+      .right-section{
+        padding-top: 1rem;
+        background-color: #03010E;
+        color: white;
+      }
+      .left-section a p{
+        color: white;
+      }
+     .right-section section{
+      padding: 0 .5rem;
+     }
+     .left-section > div {
+          margin-top: 1rem;
+          flex-basis: 10%;
+          margin-left: 6%;
+          padding-right: 0rem;
+          align-self: auto;
+          height: fit-content;
+          box-shadow: 0px 0px 40px black;
+      }
+     .left-section > div:hover {
+          box-shadow: 0px 0px 10px rgb(209, 206, 206);
+          transition: 1s;
+}
+.sdisc {
+  margin-top: 1rem;
+   background-color: #03010E;
+}
+.sdisc h3{
+  padding-bottom: 0.5rem;
+  color: #ff6300;
+}
+.more-sdisc h3{
+  padding: 1rem 0 1rem 0;
+  color: #ff6300;
+}
+.left-section img{
+  width: 100%;
+  height: 12rem;
+  border-radius: 20px;
+}
+.inner-right{
+  width: 100%;
+
+}
+.inner-right img{
+  width: 100%;
+  height: 30rem;
+   background-color: #03010E;
+   border-radius: 20px;
+}
+section{
+  margin-bottom: 5rem;
+}
+.comment-div{
+ flex-direction: column;
+ margin-left: 1rem;
+}
+.likes{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+.likes i{
+  font-size: 28px;
+  border-radius: 50%;
+}
+.likes .like:hover{
+  color: #ff6300;
+  cursor: pointer;
+}
+.likes .dislike:hover{
+    border: 1px white solid;
+  background-color: red;
+  /* transition: 1s; */
+}
+.likes p{
+  font-size: 48px;
+  color: #ff6300;
+}
+textarea{
+  border: 0;
+  background-color: #03010e;
+  border-bottom: 1px solid #ff6300;
+  outline: 0;
+  width: 20rem;
+  height: 4rem;
+  padding-top: 1rem;
+  color: white;
+  font-size: 12px;
+}
+.bottomcomment{
+  width: 15rem;
+  /* border: 2px red solid; */
+  /* position: absolute; */
+}
+.comment-button{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+}
+#addCom{
+  border: 0;
+  outline: 0;
+  border-radius: 5px 5px 0 0;
+  border: 1px solid #ff6300;
+  background-color: #03010E;
+  color: white;
+  padding: .3rem;
+  margin: .5rem;
+}
+.comdiv{
+  width: 20rem;
+  margin-bottom: 1rem;
+  height: fit-content;
+  background-color: #03010E;
+  box-shadow: 0px 0px 2px white;
+  padding: .3rem;
+}
+.com_h1{
+  color: #ff6300; 
+  font-size: 15px; 
+  padding-bottom: 1rem;
+}
+.comdiv h1{
+font-size:20px;
+}
+.comdiv h4{
+  font-size:12px; 
+  margin-left: 30px;
+}
+.user{
+  margin-right: 10px;
+}
+

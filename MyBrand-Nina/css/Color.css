@@ -1,0 +1,17 @@
+:root {
+  --main-color: #03010e;
+  --main-div-color: #1c1c1c;
+  --headings: #ff6300;
+  --text-color: #ffffff;
+
+  --main-color-2: #7b1fa2;
+}
+
+
+body{
+
+background-color:  #1A2035;
+
+/* background-color:  rgb(26,32,53); */
+
+}
